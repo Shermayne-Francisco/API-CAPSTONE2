@@ -83,6 +83,13 @@
 					echo json_encode($post->addAppointment($d));
 					break;
 
+				case 'addAppoinmentForClient':
+					echo json_encode($post->addAppoinmentForClient($d));
+					break;
+				case 'addHealthForClient':
+					echo json_encode($post->addHealthForClient($d));
+					break;
+
 				case 'getAppointment':
 					echo json_encode($get->getAppointment($req[1]));
 					break;
@@ -90,7 +97,11 @@
 				case 'getRequestAppointment':
 					echo json_encode($get->getRequestAppointment($d));
 					break;
-			
+
+				case 'getPendingAppointment':
+					echo json_encode($get->getPendingAppointment($d));
+					break;
+		
 				case 'getAllAppointments':
 					echo json_encode($get->getAllAppointments());
 					break;
@@ -114,6 +125,76 @@
 				case 'Admin_Login':
 					echo json_encode($auth->Admin_Login($d));
 					break;
+
+				// CARDS 
+				case 'getAllRequest':
+					echo json_encode($get->getAllRequest());
+					break;
+				case 'getAllCompleted':
+					echo json_encode($get->getAllCompleted());
+					break;
+				case 'getAllPending':
+					echo json_encode($get->getAllPending());
+					break;
+
+				case 'getAllClients':
+					echo json_encode($get->getAllClients());
+					break;
+				// END CARDS
+
+				// TABLE
+
+				// CLIENTS TABLE
+				case 'getALLClientsInfo':
+					echo json_encode($get->getALLClientsInfo());
+					break;
+				// CLIENTS TABLE
+
+
+				// VACCINATION REPORTS
+				case 'getAllVaccinationReports':
+					echo json_encode($get->getAllVaccinationReports());
+					break;
+				// VACCINATION REPORTS
+
+				// DEWORMING REPORTS
+				case 'getAllDewormingReports':
+					echo json_encode($get->getAllDewormingReports());
+					break;
+				// DEWORMING REPORTS
+
+				// HEARTWORM REPORTS
+				case 'getAllHeartWormReports':
+					echo json_encode($get->getAllHeartWormReports());
+					break;
+				// HEARTWORM REPORTS
+
+
+				// GROOMING REPORTS
+				case 'getAllGroomingReports':
+					echo json_encode($get->getAllGroomingReports());
+					break;
+				// GROOMING REPORTS
+
+				// OTHER REPORTS
+				case 'getAllOtherReports':
+					echo json_encode($get->getAllOtherReports());
+					break;
+				// OTHER REPORTS
+
+				// REQUEST TABLE
+				case 'getAllRequestForTable':
+					echo json_encode($get->getAllRequestForTable());
+					break;
+				// REQUEST TABLE
+
+				// END TABLE
+
+				// FETCH INFO
+				case 'getSpecificClientInfo':
+					echo json_encode($get->getSpecificClientInfo($req[1]));
+					break;
+				// END INFO
 					
 				default:
 					echo errmsg(400);

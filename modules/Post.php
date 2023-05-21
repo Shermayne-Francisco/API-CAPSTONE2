@@ -242,6 +242,67 @@
 		}
 
 
+		//  ADD SCHEDULE FOR CLIENT
+			// LAGAY MO NEIL SA EXECUTE
+			public function addAppoinmentForClient($data)
+			{
+				$payload = [];
+				$code = 404;
+				$remarks = "failed";
+				$message = "Unable to retrieve data";
+				try {
+					$sql = "INSERT INTO appointment_tbl (user_id,pet_id,app_type,status,app_date, app_time) VALUES (?,?,?,?,?)";
+					$sql = $this->pdo->prepare($sql);
+					$sql->execute([$data->user_id, 
+									$data->pet_id,
+									$data->app_type,
+									'Pending',
+									$data->app_date,
+									$data->app_time
+								]);
+						$code = 200;
+						$remarks = "success";
+						$message = "Successfully retrieved requested records";
+				
+					return $this->gm->response($payload, $remarks, $message, $code);
+		
+
+				}catch (\PDOException $e) {
+					return $this->gm->response($payload, $remarks, $message, $code);
+				}
+			}
+		//  ADD SCHEDULE FOR CLIENT
+
+		//  ADD COMPLETED HEALTH FOR CLIENT
+		public function addHealthForClient($data)
+		{
+			$payload = [];
+			$code = 404;
+			$remarks = "failed";
+			$message = "Unable to retrieve data";
+			try {
+				$sql = "INSERT INTO completed_tbl (user_id,pet_id,app_type,name_of_medicine,pet_weight, app_date) VALUES (?,?,?,?,?,?)";
+				$sql = $this->pdo->prepare($sql);
+				$sql->execute([$data->user_id, 
+								$data->pet_id,
+								$data->app_type,
+								$data->name_of_medicine,
+								$data->pet_weight,
+								$data->app_date
+							]);
+					$code = 200;
+					$remarks = "success";
+					$message = "Successfully retrieved requested records";
+			
+				return $this->gm->response($payload, $remarks, $message, $code);
+	
+
+			}catch (\PDOException $e) {
+				return $this->gm->response($payload, $remarks, $message, $code);
+			}
+		}
+	//  ADD SCHEDULE FOR CLIENT
+
 
 	}
 ?>
