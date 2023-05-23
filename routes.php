@@ -194,6 +194,24 @@
 					echo json_encode($get->getSpecificClientInfo($req[1]));
 					break;
 				// END INFO
+
+				// PRINT REPORTS
+					case 'printVaccinationReports':
+						echo json_encode($get->printVaccinationReports());
+						break;
+					case 'printDewormingReports':
+						echo json_encode($get->printDewormingReports());
+						break;
+					case 'printHeartWormReports':
+						echo json_encode($get->printHeartWormReports());
+						break;
+					case 'printGroomingReports':
+						echo json_encode($get->printGroomingReports());
+						break;
+					case 'printOtherReports':
+						echo json_encode($get->printOtherReports());
+						break;
+				// PRINT REPORTS
 					
 				default:
 					echo errmsg(400);
