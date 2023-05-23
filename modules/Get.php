@@ -75,6 +75,7 @@
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
 
+		//User Side - Health History of Pets
 		public function getPetinfos($data,$pet_id)
 		{
 			$payload = [];
@@ -119,6 +120,7 @@
 			}
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
+		//User Side - End Health History of Pets
 
 		public function getAppointment($user_id) 
 		{
@@ -353,7 +355,11 @@
 				$remarks = "failed";
 				$message = "Unable to retrieve data";
 			
-				$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Vaccination' AND status = 'Completed'";
+				$sql = "SELECT users.user_id, users.user_fname, users.user_lname, pet_tbl.pet_id, pet_tbl.pet_name, 
+				appointment_tbl.app_id, appointment_tbl.user_id, appointment_tbl.pet_id, 
+				appointment_tbl.app_type, appointment_tbl.app_date
+				 FROM users users, pet_tbl pet_tbl,appointment_tbl appointment_tbl
+				 WHERE app_type = 'Vaccination' AND status = 'Completed'";
 				$res = $this->gm->executeQuery($sql);
 
 				if ($res['code']==200) {
@@ -373,7 +379,11 @@
 				$remarks = "failed";
 				$message = "Unable to retrieve data";
 			
-				$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Deworming' AND status = 'Completed'";
+				$sql = "SELECT SELECT users.user_id, users.user_fname, users.user_lname, pet_tbl.pet_id, pet_tbl.pet_name, 
+				appointment_tbl.app_id, appointment_tbl.user_id, appointment_tbl.pet_id, 
+				appointment_tbl.app_type, appointment_tbl.app_date
+				 FROM users users, pet_tbl pet_tbl,appointment_tbl appointment_tbl
+				  WHERE app_type = 'Deworming' AND status = 'Completed'";
 				$res = $this->gm->executeQuery($sql);
 
 				if ($res['code']==200) {
@@ -393,7 +403,11 @@
 				$remarks = "failed";
 				$message = "Unable to retrieve data";
 			
-				$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Heartworm' AND status = 'Completed'";
+				$sql = "SELECT users.user_id, users.user_fname, users.user_lname, pet_tbl.pet_id, pet_tbl.pet_name, 
+				appointment_tbl.app_id, appointment_tbl.user_id, appointment_tbl.pet_id, 
+				appointment_tbl.app_type, appointment_tbl.app_date
+				 FROM users users, pet_tbl pet_tbl,appointment_tbl appointment_tbl
+				  WHERE app_type = 'Heartworm' AND status = 'Completed'";
 				$res = $this->gm->executeQuery($sql);
 
 				if ($res['code']==200) {
@@ -413,7 +427,11 @@
 				$remarks = "failed";
 				$message = "Unable to retrieve data";
 			
-				$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Grooming' AND status = 'Completed'";
+				$sql = "SELECT users.user_id, users.user_fname, users.user_lname, pet_tbl.pet_id, pet_tbl.pet_name, 
+				appointment_tbl.app_id, appointment_tbl.user_id, appointment_tbl.pet_id, 
+				appointment_tbl.app_type, appointment_tbl.app_date
+				 FROM users users, pet_tbl pet_tbl,appointment_tbl appointment_tbl
+				  WHERE app_type = 'Grooming' AND status = 'Completed'";
 				$res = $this->gm->executeQuery($sql);
 
 				if ($res['code']==200) {
@@ -433,7 +451,11 @@
 				$remarks = "failed";
 				$message = "Unable to retrieve data";
 			
-				$sql = "SELECT * FROM appointment_tbl WHERE app_type != 'Grooming' AND app_type != 'Vaccination'
+				$sql = "SELECT users.user_id, users.user_fname, users.user_lname, pet_tbl.pet_id, pet_tbl.pet_name, 
+				appointment_tbl.app_id, appointment_tbl.user_id, appointment_tbl.pet_id, 
+				appointment_tbl.app_type, appointment_tbl.app_date
+				 FROM users users, pet_tbl pet_tbl,appointment_tbl appointment_tbl
+				  WHERE app_type != 'Grooming' AND app_type != 'Vaccination'
 				AND app_type != 'Deworming' AND app_type != 'Heartworm' AND status = 'Completed'";
 				$res = $this->gm->executeQuery($sql);
 
@@ -559,7 +581,32 @@
 					return $this->gm->response($payload, $remarks, $message, $code);
 				}
 		// END PRINT REPORTS
+
+
+		//GETTING SERVICE FOR PET
+		public function getPetService() {
+			$payload = [];
+			$code = 404;
+			$remarks = "failed";
+			$message = "Unable to retrieve data";
+
+			
+			$sql = "SELECT appointment_tbl.app_type 
+						 FROM 
+						appointment_tbl";
+
+			$res = $this->gm->executeQuery($sql);
+
+			if ($res['code']==200) {
+				$payload = $res['data'];
+				$code = 200;
+				$remarks = "success";
+				$message = "Successfully retrieved requested records";
+			}
+			return $this->gm->response($payload, $remarks, $message, $code);
 	}
+
+}
 ?>
 
 

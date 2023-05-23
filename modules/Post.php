@@ -243,7 +243,6 @@
 
 
 		//  ADD SCHEDULE FOR CLIENT
-			// LAGAY MO NEIL SA EXECUTE
 			public function addAppoinmentForClient($data)
 			{
 				$payload = [];

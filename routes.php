@@ -224,6 +224,11 @@
 						echo json_encode($get->printOtherReports());
 						break;
 				// END PRINT REPORTS
+
+				//GETTING PET SERVICE
+					case 'getPetService':
+						echo json_encode($get->getPetService());
+						break;
 					
 				default:
 					echo errmsg(400);
