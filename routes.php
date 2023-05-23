@@ -83,7 +83,11 @@
 					break;
 
 				case 'getPetinfos':
-					echo json_encode($get->getPetinfos($data,$req[1]));
+					if(sizeof($req)>1) {
+						echo json_encode($get->getPetinfos($d,$req[1]));
+					}else{
+						echo json_encode($get->getPetinfos($d,null));
+					}
 					break;
 
 				case 'addAppointment':

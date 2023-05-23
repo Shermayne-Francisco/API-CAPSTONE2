@@ -75,22 +75,41 @@
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
 
-		public function getPetinfos($data,$pet_id){
+		public function getPetinfos($data,$pet_id)
+		{
 			$payload = [];
 			$code = 404;
 			$remarks = "failed";
 			$message = "Unable to retrieve data";
 
 			
-			$sql = "SELECT * FROM appointment_tbl INNER JOIN completed_tbl ON appointment_tbl.pet_id = completed_tbl.pet_id ";
+			$sql = "SELECT 	
+							appointment_tbl.user_id,
+							appointment_tbl.pet_id,
+							appointment_tbl.app_type,
+							appointment_tbl.status,
+							appointment_tbl.app_date,
+							appointment_tbl.created_at,
+							appointment_tbl.app_time,
+							completed_tbl.name_of_medicine,
+							completed_tbl.pet_weight,
+							completed_tbl.app_date
+
+			 FROM appointment_tbl INNER JOIN completed_tbl 
+								ON appointment_tbl.pet_id = completed_tbl.pet_id ";
 			if($pet_id != null){
 				$sql.=" WHERE appointment_tbl.pet_id = $pet_id ";
 			}
 			if($data->type != null){
-				$sql.=" AND appointment_tbl.app_type = $data->type";
-			}
+				$sql.=" AND appointment_tbl.app_type = '$data->type' ";
+			}else{
+				$sql.=" AND appointment_tbl.app_type != 'Deworming'
+						AND appointment_tbl.app_type != 'Heartworm'
+						AND appointment_tbl.app_type != 'Vaccination'";
 
+			}
 			$res = $this->gm->executeQuery($sql);
+		
 			
 			if ($res['code']==200) {
 				$payload = $res['data'];
@@ -192,11 +211,11 @@
 			$message = "Unable to retrieve data";
 
 			$sql = "SELECT users.user_id, users.user_fname, users.user_lname, pet_tbl.pet_id, pet_tbl.pet_name, 
-			appointment_tbl.app_id, appointment_tbl.user_id, appointment_tbl.pet_id, 
-			appointment_tbl.app_type, appointment_tbl.app_date, 
-			appointment_tbl.app_time, appointment_tbl.status FROM users users, pet_tbl pet_tbl, 
-			appointment_tbl appointment_tbl
-			WHERE users.user_id = appointment_tbl.user_id AND pet_tbl.pet_id = appointment_tbl.pet_id";
+						appointment_tbl.app_id, appointment_tbl.user_id, appointment_tbl.pet_id, 
+						appointment_tbl.app_type, appointment_tbl.app_date, 
+						appointment_tbl.app_time, appointment_tbl.status FROM users users, pet_tbl pet_tbl, 
+						appointment_tbl appointment_tbl
+						WHERE users.user_id = appointment_tbl.user_id AND pet_tbl.pet_id = appointment_tbl.pet_id";
 
 			$res = $this->gm->executeQuery($sql);
 
