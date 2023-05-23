@@ -51,7 +51,6 @@
 						echo json_encode($get->getuserpet($req[1]));
 					}else{
 						echo json_encode($get->getuserpet(null));
-						
 					}
 					break;
 
@@ -86,6 +85,7 @@
 				case 'addAppoinmentForClient':
 					echo json_encode($post->addAppoinmentForClient($d));
 					break;
+
 				case 'addHealthForClient':
 					echo json_encode($post->addHealthForClient($d));
 					break;
@@ -130,9 +130,11 @@
 				case 'getAllRequest':
 					echo json_encode($get->getAllRequest());
 					break;
+
 				case 'getAllCompleted':
 					echo json_encode($get->getAllCompleted());
 					break;
+
 				case 'getAllPending':
 					echo json_encode($get->getAllPending());
 					break;
@@ -143,7 +145,6 @@
 				// END CARDS
 
 				// TABLE
-
 				// CLIENTS TABLE
 				case 'getALLClientsInfo':
 					echo json_encode($get->getALLClientsInfo());
@@ -169,7 +170,6 @@
 					break;
 				// HEARTWORM REPORTS
 
-
 				// GROOMING REPORTS
 				case 'getAllGroomingReports':
 					echo json_encode($get->getAllGroomingReports());
@@ -187,7 +187,6 @@
 					echo json_encode($get->getAllRequestForTable());
 					break;
 				// REQUEST TABLE
-
 				// END TABLE
 
 				// FETCH INFO

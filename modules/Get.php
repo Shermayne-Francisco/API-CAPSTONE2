@@ -183,7 +183,7 @@
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
 
-		// COUNT 
+		// COUNT ALL CLIENTS
 		public function getAllClients() {
 			$payload = [];
 			$code = 404;
@@ -202,14 +202,14 @@
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
 
-		// COUNT 
+		// COUNT ALL REQUEST
 		public function getAllRequest() {
 			$payload = [];
 			$code = 404;
 			$remarks = "failed";
 			$message = "Unable to retrieve data";
 		
-			$sql = "SELECT count(*) FROM appointment_tbl ORDER BY app_id WHERE status 'Pending'";
+			$sql = "SELECT count(*) FROM appointment_tbl WHERE status = 'Appointed' ORDER BY app_id";
 			$res = $this->gm->executeQuery($sql);
 			
 			if ($res['code']==200) {
@@ -221,7 +221,7 @@
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
 
-		// COUNT 
+		// COUNT ALL COMPLETED
 		public function getAllCompleted() {
 			$payload = [];
 			$code = 404;
@@ -241,7 +241,7 @@
 		}
 
 		
-		// COUNT 
+		// COUNT ALL PENDING
 		public function getAllPending() {
 			$payload = [];
 			$code = 404;
@@ -259,6 +259,7 @@
 			}
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
+
 		
 		// CLIENTS TABLE
 			public function getALLClientsInfo() {
@@ -281,13 +282,13 @@
 		// END CLIENTS TABLE
 
 		// CERTAIN CLIENT
-			public function getSpecificClientInfo($data) {
+			public function getSpecificClientInfo($user_id) {
 				$payload = [];
 				$code = 404;
 				$remarks = "failed";
 				$message = "Unable to retrieve data";
 			
-				$sql = "SELECT * FROM users INNER JOIN pet_tbl ON users.user_id = pet_tbl.user_id WHERE users.user_id = $data;";
+				$sql = "SELECT * FROM users INNER JOIN pet_tbl ON users.user_id = pet_tbl.user_id WHERE users.user_id = $user_id;";
 				$res = $this->gm->executeQuery($sql);
 
 				if ($res['code']==200) {
