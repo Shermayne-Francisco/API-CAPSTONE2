@@ -361,6 +361,26 @@
 		// END HEARTWORM TREATMENT
 
 		// GROOMING TREATMENT
+			public function getAllGroomingReports() {
+				$payload = [];
+				$code = 404;
+				$remarks = "failed";
+				$message = "Unable to retrieve data";
+			
+				$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Grooming' AND status = 'Completed'";
+				$res = $this->gm->executeQuery($sql);
+
+				if ($res['code']==200) {
+					$payload = $res['data'];
+					$code = 200;
+					$remarks = "success";
+					$message = "Successfully retrieved requested records";
+				}
+				return $this->gm->response($payload, $remarks, $message, $code);
+			}
+		// END GROOMING TREATMENT
+
+		// OTHER REPORTS
 			public function getAllOtherReports() {
 				$payload = [];
 				$code = 404;
@@ -379,8 +399,7 @@
 				}
 				return $this->gm->response($payload, $remarks, $message, $code);
 			}
-		// END GROOMING TREATMENT
-
+		// END OTHER REPORTS
 
 		// REQUEST TABLE
 			public function getAllRequestForTable() {
@@ -401,10 +420,99 @@
 				return $this->gm->response($payload, $remarks, $message, $code);
 			}
 		// REQUEST TABLE
-		
-	
 
-	 
+		// PRINT REPORTS
+				public function printVaccinationReports() {
+					$payload = [];
+					$code = 404;
+					$remarks = "failed";
+					$message = "Unable to retrieve data";
+				
+					$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Vaccination' AND status = 'Completed'";
+					$res = $this->gm->executeQuery($sql);
+
+					if ($res['code']==200) {
+						$payload = $res['data'];
+						$code = 200;
+						$remarks = "success";
+						$message = "Successfully retrieved requested records";
+					}
+					return $this->gm->response($payload, $remarks, $message, $code);
+				}
+
+				public function printDewormingReports() {
+					$payload = [];
+					$code = 404;
+					$remarks = "failed";
+					$message = "Unable to retrieve data";
+				
+					$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Deworming' AND status = 'Completed'";
+					$res = $this->gm->executeQuery($sql);
+
+					if ($res['code']==200) {
+						$payload = $res['data'];
+						$code = 200;
+						$remarks = "success";
+						$message = "Successfully retrieved requested records";
+					}
+					return $this->gm->response($payload, $remarks, $message, $code);
+				}
+
+				public function printHeartWormReports() {
+					$payload = [];
+					$code = 404;
+					$remarks = "failed";
+					$message = "Unable to retrieve data";
+				
+					$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Heartworm' AND status = 'Completed'";
+					$res = $this->gm->executeQuery($sql);
+
+					if ($res['code']==200) {
+						$payload = $res['data'];
+						$code = 200;
+						$remarks = "success";
+						$message = "Successfully retrieved requested records";
+					}
+					return $this->gm->response($payload, $remarks, $message, $code);
+				}
+
+				public function printGroomingReports() {
+					$payload = [];
+					$code = 404;
+					$remarks = "failed";
+					$message = "Unable to retrieve data";
+				
+					$sql = "SELECT * FROM appointment_tbl WHERE app_type = 'Grooming' AND status = 'Completed'";
+					$res = $this->gm->executeQuery($sql);
+
+					if ($res['code']==200) {
+						$payload = $res['data'];
+						$code = 200;
+						$remarks = "success";
+						$message = "Successfully retrieved requested records";
+					}
+					return $this->gm->response($payload, $remarks, $message, $code);
+				}
+
+				public function printOtherReports() {
+					$payload = [];
+					$code = 404;
+					$remarks = "failed";
+					$message = "Unable to retrieve data";
+				
+					$sql = "SELECT * FROM appointment_tbl WHERE app_type != 'Grooming' AND app_type != 'Vaccination'
+					AND app_type != 'Deworming' AND app_type != 'Heartworm' AND status = 'Completed'";
+					$res = $this->gm->executeQuery($sql);
+
+					if ($res['code']==200) {
+						$payload = $res['data'];
+						$code = 200;
+						$remarks = "success";
+						$message = "Successfully retrieved requested records";
+					}
+					return $this->gm->response($payload, $remarks, $message, $code);
+				}
+		// PRINT REPORTS
 	}
 ?>
 
