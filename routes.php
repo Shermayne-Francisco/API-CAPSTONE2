@@ -70,12 +70,20 @@
 					}
 					break;
 
+				case 'test':
+					echo json_encode($get->test($d));
+					break;
+
 				case 'getPetAppointment':
 					if(sizeof($req)>1) {
 						echo json_encode($get->getPetAppointment($d,$req[1]));
 					}else{
 						echo json_encode($get->getPetAppointment($d,null));
 					}
+					break;
+
+				case 'getPetinfos':
+					echo json_encode($get->getPetinfos($data,$req[1]));
 					break;
 
 				case 'addAppointment':
@@ -211,7 +219,7 @@
 					case 'printOtherReports':
 						echo json_encode($get->printOtherReports());
 						break;
-				// PRINT REPORTS
+				// END PRINT REPORTS
 					
 				default:
 					echo errmsg(400);

@@ -75,6 +75,32 @@
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
 
+		public function getPetinfos($data,$pet_id){
+			$payload = [];
+			$code = 404;
+			$remarks = "failed";
+			$message = "Unable to retrieve data";
+
+			
+			$sql = "SELECT * FROM appointment_tbl INNER JOIN completed_tbl ON appointment_tbl.pet_id = completed_tbl.pet_id ";
+			if($pet_id != null){
+				$sql.=" WHERE appointment_tbl.pet_id = $pet_id ";
+			}
+			if($data->type != null){
+				$sql.=" AND appointment_tbl.app_type = $data->type";
+			}
+
+			$res = $this->gm->executeQuery($sql);
+			
+			if ($res['code']==200) {
+				$payload = $res['data'];
+				$code = 200;
+				$remarks = "success";
+				$message = "Successfully retrieved requested records";
+			}
+			return $this->gm->response($payload, $remarks, $message, $code);
+		}
+
 		public function getAppointment($user_id) 
 		{
 			$payload = [];
@@ -513,7 +539,7 @@
 					}
 					return $this->gm->response($payload, $remarks, $message, $code);
 				}
-		// PRINT REPORTS
+		// END PRINT REPORTS
 	}
 ?>
 
