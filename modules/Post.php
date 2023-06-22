@@ -16,7 +16,7 @@
 			$remarks = "failed";
 			$message = "Unable to save data";
 			
-			$sql = "INSERT INTO pet_tbl (user_id, pet_name, pet_cm, pet_breed, birthdate,gender) VALUES (?,?,?,?,?,?)";
+			$sql = "INSERT INTO pet_tbl (user_id, pet_name, pet_cm, pet_breed, birthdate,gender, species) VALUES (?,?,?,?,?,?,?)";
             $sql = $this->pdo->prepare($sql);
             $sql->execute([
                 $data->user_id,
@@ -24,7 +24,8 @@
                 $data->pet_cm,
                 $data->pet_breed,
                 $data->birthdate,
-                $data->gender
+                $data->gender,
+                $data->species,
             ]);
 
             $LAST_ID = $this->pdo->lastInsertId();
@@ -40,6 +41,32 @@
 				$remarks = "success";
 				$message = "Successfully retrieved requested records";
 			}
+			return $this->gm->response($payload, $remarks, $message, $code);
+		}
+
+		public function updatePet($data){
+			$payload = [];
+			$code = 404;
+			$remarks = "failed";
+			$message = "Unable to save data";
+			
+			$sql = "UPDATE pet_tbl SET pet_name=? WHERE pet_id=?";
+            $sql = $this->pdo->prepare($sql);
+            $sql->execute([
+                $data->pet_name,
+                $data->pet_id,
+            ]);
+
+            $count = $sql->rowCount();
+
+
+			if ($count) {
+				$payload = $count;
+				$code = 200;
+				$remarks = "success";
+				$message = "Successfully retrieved requested records";
+			}
+
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
 
@@ -125,8 +152,8 @@
 			}
 		}
 
-		public function addAppointment($data)
-		{
+		// ADDING APPOINTMENTS
+		public function addAppointment($data) {
 			$payload = [];
 			$code = 404;
 			$remarks = "failed";
@@ -154,6 +181,7 @@
 				return $this->gm->response($payload, $remarks, $message, $code);
 			}
 		}
+		// END ADDING APPOINTMENTS
 
 		public function updatePassword($data,$user_id)
 		{
@@ -301,9 +329,6 @@
 				}
 			}
 		// END ADD COMPLETED HEALTH FOR CLIENT
-
-
-
 
 	}
 ?>

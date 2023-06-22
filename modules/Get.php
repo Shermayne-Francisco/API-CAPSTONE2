@@ -52,6 +52,7 @@
 			}
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
+
 		public function getpetinfo($pet_id) 
 		{
 			$payload = [];
@@ -306,7 +307,7 @@
 			}
 			return $this->gm->response($payload, $remarks, $message, $code);
 		}
-
+		// END COUNT ALL PENDING
 		
 		// CLIENTS TABLE
 			public function getALLClientsInfo() {

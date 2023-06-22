@@ -130,6 +130,10 @@
 					echo json_encode($post->updatePassword($d,$req[1]));
 					break;
 
+				case 'updatePet':
+					echo json_encode($post->updatePet($d));
+					break;
+
 				case 'deletePet':
 					echo json_encode($post->deletePet($req[1]));
 					break;
